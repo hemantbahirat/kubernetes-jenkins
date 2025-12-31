@@ -8,18 +8,20 @@ spec:
   selector:
     matchLabels:
       app: jenkins-server
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: jenkins-server
     spec:
       securityContext:
-            fsGroup: 1000 
+            fsGroup: 1000
             runAsUser: 1000
       serviceAccountName: jenkins-admin
       containers:
         - name: jenkins
-          image: jenkins/jenkins:lts
+          image: jenkins/jenkins:lts-jdk21
           resources:
             limits:
               memory: "2Gi"
